@@ -15,6 +15,12 @@ margarita = pizza("Margarita", ["Mozarella", "domates", "fesleğen"], 50)
 turkPizza = pizza("Türk Pizza", ["Sucuk","pastırma","biber","mantar",], 45)
 sade = pizza("Sade Peynirli", ["Parmesan", "rokfor", "kaşar", "mozarella"], 55)
 
+class klasikPizza:
+    def __init__():
+
+    
+
+
 klasik.describe()
 margarita.describe()
 turkPizza.describe()
