@@ -1,3 +1,21 @@
+import csv
+import datetime
+
+with open('Menu.txt', 'w') as f:
+    f.write("* Please Choose a Pizza Base:\n")
+    f.write("1: Classic\n")
+    f.write("2: Margherita\n")
+    f.write("3: TurkPizza\n")
+    f.write("4: PlainPizza\n")
+    f.write("* and sauce of your choice:\n")
+    f.write("11: Olives\n")
+    f.write("12: Mushrooms\n")
+    f.write("13: GoatCheese\n")
+    f.write("14: Meat\n")
+    f.write("15: Onions\n")
+    f.write("16: Corn\n")
+    f.write("* Thank you!\n")
+
 class Pizza:
     def __init__(self, name, descripton, price):
         self.name = name
@@ -6,16 +24,11 @@ class Pizza:
 
     def get_descripton(self):
         print(self.descripton)
-        """ return self.component.get_description() + \
-         ' ' + Pizza.get_description(self)
-        """
+        # return self.description
 
     def get_cost(self):
         print(self.price)
-        """
-        return self.component.get_cost() + \
-         Pizza.get_cost(self)
-       """
+        # returm self.price
 
 
 class klasikPizza(Pizza):
@@ -38,6 +51,7 @@ class turkPizza(Pizza):
 class sadePizza(Pizza):
     def __init__(self):
         super().__init__('Sade Peynirli', 'Parmesan, rokfor, kaşar, mozarella', "55 ₺")
+
 
 
 klasikPizzam = klasikPizza()
