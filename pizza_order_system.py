@@ -31,32 +31,38 @@ class Pizza:
         # returm self.price
 
 
-class klasikPizza(Pizza):
+class classicPizza(Pizza):
     def __init__(self):
-        super().__init__(
-            "Klasik Pizza", "Domates, kaşar keyniri, mantar, sucuk, salam ve sosis", "60 ₺"
-        )
+        super().__init__("Classic Pizza", "Tomato, Cheddar Cheese, Mushroom, Sausage, Salami and Sausage", "60 ₺")
 
 
 class margaritaPizza(Pizza):
     def __init__(self):
-        super().__init__('Margarita', "Mozarella, domates, fesleğen", "50 ₺")
+        super().__init__('Margarita', "Mozzarella, tomato, basil", "50 ₺")
 
 
-class turkPizza(Pizza):
+class turkishPizza(Pizza):
     def __init__(self):
-        super().__init__('Türk Pizza', 'Sucuk, pastırma, biber, mantar', "45 ₺")
+        super().__init__('Turkish Pizza', 'Sausage, bacon, pepper, mushroom', "45 ₺")
 
 
-class sadePizza(Pizza):
+class cheesePizza(Pizza):
     def __init__(self):
-        super().__init__('Sade Peynirli', 'Parmesan, rokfor, kaşar, mozarella', "55 ₺")
+        super().__init__('Cheese Pizza', 'Parmesan, Roquefort, Cheddar, Mozzarella', "55 ₺")
+
+class Decorators:
+    def  __init__(self, extra, prices):
+        self.extra = extra
+        self.prices = prices
+
+extra = {"Ketchup:": 3, "Mushroom": 5, "Goat Cheese": 9, "Meat": 7, "Onion": 4, "Corn": 3,}
 
 
 
-klasikPizzam = klasikPizza()
+
+klasikPizzam = classicPizza()
 margaritaPizzam = margaritaPizza()
-turkPizzam = turkPizza()
-sadePizzam = sadePizza()
+turkishPizzam = turkishPizza()
+cheesePizzam = cheesePizza()
 
 klasikPizzam.get_descripton()
