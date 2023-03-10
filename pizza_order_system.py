@@ -1,39 +1,48 @@
-import csv
-import datetime
-
-class pizza:
-    def __init__(self, name,materials, price):
+class Pizza:
+    def __init__(self, name, descripton, price):
         self.name = name
-        self.materials= materials
+        self.descripton = descripton
         self.price = price
-    
-    def describe(self):
-        print(f"{self.name}: {', ' .join(self.materials)}, {self.price}₺")
 
-klasik = pizza("Klasik Pizza", ["Domates", "kaşar keyniri", "mantar","sucuk","salam", "sosis",], 60)
-margarita = pizza("Margarita", ["Mozarella", "domates", "fesleğen"], 50)
-turk = pizza("Türk Pizza", ["Sucuk","pastırma","biber","mantar",], 45)
-sade = pizza("Sade Peynirli", ["Parmesan", "rokfor", "kaşar", "mozarella"], 55)
+    def get_descripton(self):
+        print(self.descripton)
+        """ return self.component.get_description() + \
+         ' ' + Pizza.get_description(self)
+        """
 
-class klasikPizza:
-    def __init__():
-
-class margaritaPizza:
-    def __init__():
-
-class turkPizza:
-    def __init__():
-
-class sadePizza:
-    def __init__():
+    def get_cost(self):
+        print(self.price)
+        """
+        return self.component.get_cost() + \
+         Pizza.get_cost(self)
+       """
 
 
+class klasikPizza(Pizza):
+    def __init__(self):
+        super().__init__(
+            "Klasik Pizza", "Domates, kaşar keyniri, mantar, sucuk, salam ve sosis", "60 ₺"
+        )
 
-    
+
+class margaritaPizza(Pizza):
+    def __init__(self):
+        super().__init__('Margarita', "Mozarella, domates, fesleğen", "50 ₺")
 
 
-klasik.describe()
-margarita.describe()
-turkPizza.describe()
-sade.describe()
+class turkPizza(Pizza):
+    def __init__(self):
+        super().__init__('Türk Pizza', 'Sucuk, pastırma, biber, mantar', "45 ₺")
 
+
+class sadePizza(Pizza):
+    def __init__(self):
+        super().__init__('Sade Peynirli', 'Parmesan, rokfor, kaşar, mozarella', "55 ₺")
+
+
+klasikPizzam = klasikPizza()
+margaritaPizzam = margaritaPizza()
+turkPizzam = turkPizza()
+sadePizzam = sadePizza()
+
+klasikPizzam.get_descripton()
