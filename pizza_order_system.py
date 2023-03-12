@@ -50,19 +50,82 @@ class cheesePizza(Pizza):
     def __init__(self):
         super().__init__('Cheese Pizza', 'Parmesan, Roquefort, Cheddar, Mozzarella', "55 ₺")
 
-class Decorators:
+    classicPizzam = classicPizza()
+    margaritaPizzam = margaritaPizza()
+    turkishPizzam = turkishPizza()
+    cheesePizzam = cheesePizza()
+
+    classicPizzam.get_descripton()
+    margaritaPizzam.get_descripton()
+    turkishPizzam.get_descripton()
+    cheesePizzam.get_descripton()
+
+class Decorators: #soslar üst sınıf
     def  __init__(self, extra, prices):
         self.extra = extra
         self.prices = prices
+    def get_cost(self):
+       return self.component.get_cost() + \
+         Pizza.get_cost(self)
 
-extra = {"Ketchup:": 3, "Mushroom": 5, "Goat Cheese": 9, "Meat": 7, "Onion": 4, "Corn": 3,}
+
+    def get_description(self):
+       return self.component.get_description() + \
+          + Pizza.get_description(self)
+
+class Zeytin: #soslar alt sınıfları
+    def __init__(self):
+        self.name = "Zeytin Sosu"
+        self.ingredients = ["Zeytin"]
+        self.price = 3
+
+    def __str__(self):
+        return self.name
+
+class Mantar:
+    def __init__(self):
+        self.name = "Mantar Sosu"
+        self.ingredients = ["Mantar"]
+        self.price = 4
+
+    def __str__(self):
+        return self.name
+
+class KeciPeyniri:
+    def __init__(self):
+        self.name = "Keçi Peyniri Sosu"
+        self.ingredients = ["Keçi Peyniri"]
+        self.price = 5
+
+    def __str__(self):
+        return self.name
+
+class Et:
+    def __init__(self):
+        self.name = "Et Sosu"
+        self.ingredients = ["Et"]
+        self.price = 9
+
+    def __str__(self):
+        return self.name
+
+class Sogan:
+    def __init__(self):
+        self.name = "Soğan Sosu"
+        self.ingredients = ["Soğan"]
+        self.price = 6
+
+    def __str__(self):
+        return self.name
+
+class Misir:
+    def __init__(self):
+        self.name = "Mısır Sosu"
+        self.ingredients = ["Mısır"]
+        self.price = 2
+
+    def __str__(self):
+        return self.name
 
 
 
-
-klasikPizzam = classicPizza()
-margaritaPizzam = margaritaPizza()
-turkishPizzam = turkishPizza()
-cheesePizzam = cheesePizza()
-
-klasikPizzam.get_descripton()
