@@ -19,9 +19,9 @@ with open('Menu.txt', 'w') as f:
 
 # "Pizza" üst sınıfını oluşturuyoruz. 
 class Pizza:
-    def __init__(self, name, descripton, price):
+    def __init__(self, name, description, price):
         self.name = name
-        self.descripton = descripton
+        self.description = description
         self.price = price
 
     def get_description(self):
@@ -58,9 +58,10 @@ margaritaPizzam = margaritaPizza()
 turkishPizzam = turkishPizza()
 cheesePizzam = cheesePizza()
 
-margaritaPizzam.get_descripton()
-turkishPizzam.get_descripton()
-cheesePizzam.get_descripton()
+classicPizzam.get_description()
+margaritaPizzam.get_description()
+turkishPizzam.get_description()
+cheesePizzam.get_description()
 
 # Tüm alt sos sınıflarının süper sınıfı olan decorator sınıfını oluşturuyoruz
 class Decorators: 
@@ -186,19 +187,14 @@ def calculate_price(pizza_choice, sauce_choice):
 def get_customer_info():
 
     total_price, pizza, sauce = calculate_price(*show_menu())
-    pizza.get_descripton()
-    print(sauce.name)
+    print(pizza.description , sauce.name )
+
     name = input("Please enter your name: ")
     tc_no = input("Please enter your TC identity number: ")
     credit_card_number = input("Please enter your credit card number: ")
     credit_card_cvc = input("Please enter your credit card CVC number: ")
     now = datetime.datetime.now()
     order_time = now.strftime("%Y-%m-%d %H:%M:%S")
-
-    
-
-    credit_card_number = input("Please enter your credit card number: ")
-    credit_card_cvc = input("Please enter your credit card CVC number: ")
 
     #aldığımız inputu 'Orders_Database.csv' dosyasına append modunda ekliyoruz
     with open('Orders_Database.csv', 'a', newline='') as file:
