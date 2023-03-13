@@ -1,6 +1,5 @@
 import csv
 import datetime
-
 # Menu.txt adlı bir dosya oluşturun ve içine aşağıdaki metni yazıyoruz.
 with open('Menu.txt', 'w') as f:
     f.write("* Please Choose a Pizza Base:\n")
@@ -35,8 +34,7 @@ class Pizza:
 #Farkli pizza türleri için Pizza snıfından miras alan  alt sınıflar oluşturuyoruz.
 class classicPizza(Pizza):
     def __init__(self):
-        super().__init__("Classic Pizza",
-                         "Tomato, Cheddar Cheese, Mushroom, Sausage, Salami and Sausage", "60 ₺")
+        super().__init__("Classic Pizza", "Tomato, Cheddar Cheese, Mushroom, Sausage, Salami and Sausage", "60 ₺")
 
 
 class margaritaPizza(Pizza):
@@ -60,8 +58,13 @@ margaritaPizzam = margaritaPizza()
 turkishPizzam = turkishPizza()
 cheesePizzam = cheesePizza()
 
+margaritaPizzam.get_descripton()
+turkishPizzam.get_descripton()
+cheesePizzam.get_descripton()
+
 # Tüm alt sos sınıflarının süper sınıfı olan decorator sınıfını oluşturuyoruz
 class Decorators: 
+
     def __init__(self, extra, prices):
         self.extra = extra
         self.prices = prices
@@ -88,8 +91,8 @@ class Zeytin(Decorators):  # soslar alt sınıfları
 
 class Mantar(Decorators):
     def __init__(self):
-        self.name = "Mantar Sosu"
-        self.ingredients = ["Mantar"]
+        self.name = "Mantar Sose"
+        self.ingredients = ["Maetar"]
         self.price = 4
 
     def __str__(self):
@@ -155,13 +158,13 @@ def calculate_price(pizza_choice, sauce_choice):
     
     if pizza_choice == '1':
         pizza = classicPizzam
+        
     elif pizza_choice == '2':
         pizza = margaritaPizzam
     elif pizza_choice == '3':
         pizza = turkishPizzam
     elif pizza_choice == '4':
         pizza = cheesePizzam
-
     if sauce_choice == '11':
         sauce = Zeytin()
     elif sauce_choice == '12':
@@ -181,14 +184,18 @@ def calculate_price(pizza_choice, sauce_choice):
 
 #müşteridem isim, tc, card no, cvc, order date değerlerini aldığımuz method
 def get_customer_info():
+
+    total_price, pizza, sauce = calculate_price(*show_menu())
+    pizza.get_descripton()
+    print(sauce.name)
     name = input("Please enter your name: ")
     tc_no = input("Please enter your TC identity number: ")
-   
-    
+    credit_card_number = input("Please enter your credit card number: ")
+    credit_card_cvc = input("Please enter your credit card CVC number: ")
     now = datetime.datetime.now()
     order_time = now.strftime("%Y-%m-%d %H:%M:%S")
 
-    total_price, pizza, sauce = calculate_price(*show_menu())
+    
 
     credit_card_number = input("Please enter your credit card number: ")
     credit_card_cvc = input("Please enter your credit card CVC number: ")
@@ -200,6 +207,6 @@ def get_customer_info():
 
     print(f"Thank you for your order! Your total price is {total_price} ₺")
 
-#main function
-if __name__ == "__main__":
-    get_customer_info()
+
+get_customer_info()
+
