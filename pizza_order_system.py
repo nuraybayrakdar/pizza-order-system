@@ -203,6 +203,7 @@ def get_customer_info():
 
     print(f"Thank you for your order! Your total price is {total_price} ₺")
 
-
-get_customer_info()
+#main function
+if __name__ == "__main__":
+    get_customer_info()
 
