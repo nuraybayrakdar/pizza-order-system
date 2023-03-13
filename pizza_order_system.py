@@ -1,6 +1,5 @@
 import csv
 import datetime
-import pizza
 with open('Menu.txt', 'w') as f:
     f.write("* Please Choose a Pizza Base:\n")
     f.write("1: Classic\n")
@@ -17,24 +16,37 @@ with open('Menu.txt', 'w') as f:
     f.write("* Thank you!\n")
 
 
+class Pizza:
+    def __init__(self, name, descripton, price):
+        self.name = name
+        self.descripton = descripton
+        self.price = price
 
-class classicPizza(pizza.Pizza):
+    def get_descripton(self):
+        print(self.descripton)
+        # return self.description
+
+    def get_cost(self):
+        print(self.price)
+        # returm self.price
+
+
+class classicPizza(Pizza):
     def __init__(self):
-        super().__init__("Classic Pizza",
-                         "Tomato, Cheddar Cheese, Mushroom, Sausage, Salami and Sausage", "60 ₺")
+        super().__init__("Classic Pizza", "Tomato, Cheddar Cheese, Mushroom, Sausage, Salami and Sausage", "60 ₺")
 
 
-class margaritaPizza(pizza.Pizza):
+class margaritaPizza(Pizza):
     def __init__(self):
         super().__init__('Margarita', "Mozzarella, tomato, basil", "50 ₺")
 
 
-class turkishPizza(pizza.Pizza):
+class turkishPizza(Pizza):
     def __init__(self):
         super().__init__('Turkish Pizza', 'Sausage, bacon, pepper, mushroom', "45 ₺")
 
 
-class cheesePizza(pizza.Pizza):
+class cheesePizza(Pizza):
     def __init__(self):
         super().__init__('Cheese Pizza', 'Parmesan, Roquefort, Cheddar, Mozzarella', "55 ₺")
 
@@ -44,12 +56,12 @@ margaritaPizzam = margaritaPizza()
 turkishPizzam = turkishPizza()
 cheesePizzam = cheesePizza()
 
-'''
-classicPizzam.get_descripton()
+
+
 margaritaPizzam.get_descripton()
 turkishPizzam.get_descripton()
 cheesePizzam.get_descripton()
-'''
+
 
 class Decorators:  # soslar üst sınıf
     def __init__(self, extra, prices):
@@ -58,11 +70,11 @@ class Decorators:  # soslar üst sınıf
 
     def get_cost(self):
         return self.component.get_cost() + \
-            pizza.Pizza.get_cost(self)
+            Pizza.get_cost(self)
 
     def get_description(self):
         return self.component.get_description() + \
-            + pizza.Pizza.get_description(self)
+            + Pizza.get_description(self)
 
 
 class Zeytin:  # soslar alt sınıfları
@@ -139,13 +151,13 @@ def calculate_price(pizza_choice, sauce_choice):
 
     if pizza_choice == '1':
         pizza = classicPizzam
+        
     elif pizza_choice == '2':
         pizza = margaritaPizzam
     elif pizza_choice == '3':
         pizza = turkishPizzam
     elif pizza_choice == '4':
         pizza = cheesePizzam
-
     if sauce_choice == '11':
         sauce = Zeytin()
     elif sauce_choice == '12':
@@ -164,15 +176,18 @@ def calculate_price(pizza_choice, sauce_choice):
     return total_price, pizza, sauce
 
 def get_customer_info():
+
+    total_price, pizza, sauce = calculate_price(*show_menu())
+    pizza.get_descripton()
+    print(sauce.name)
     name = input("Please enter your name: ")
     tc_no = input("Please enter your TC identity number: ")
     credit_card_number = input("Please enter your credit card number: ")
     credit_card_cvc = input("Please enter your credit card CVC number: ")
-
     now = datetime.datetime.now()
     order_time = now.strftime("%Y-%m-%d %H:%M:%S")
 
-    total_price, pizza, sauce = calculate_price(*show_menu())
+    
 
     with open('Orders_Database.csv', 'a', newline='') as file:
         writer = csv.writer(file)
@@ -181,5 +196,4 @@ def get_customer_info():
     print(f"Thank you for your order! Your total price is {total_price} ₺")
 
 
-if __name__ == "__main__":
-    get_customer_info()
+get_customer_info()
