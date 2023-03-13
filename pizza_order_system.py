@@ -1,6 +1,6 @@
 import csv
 import datetime
-
+import pizza
 with open('Menu.txt', 'w') as f:
     f.write("* Please Choose a Pizza Base:\n")
     f.write("1: Classic\n")
@@ -17,38 +17,24 @@ with open('Menu.txt', 'w') as f:
     f.write("* Thank you!\n")
 
 
-class Pizza:
-    def __init__(self, name, descripton, price):
-        self.name = name
-        self.descripton = descripton
-        self.price = price
 
-    def get_descripton(self):
-        print(self.descripton)
-        # return self.description
-
-    def get_cost(self):
-        print(self.price)
-        # returm self.price
-
-
-class classicPizza(Pizza):
+class classicPizza(pizza.Pizza):
     def __init__(self):
         super().__init__("Classic Pizza",
                          "Tomato, Cheddar Cheese, Mushroom, Sausage, Salami and Sausage", "60 ₺")
 
 
-class margaritaPizza(Pizza):
+class margaritaPizza(pizza.Pizza):
     def __init__(self):
         super().__init__('Margarita', "Mozzarella, tomato, basil", "50 ₺")
 
 
-class turkishPizza(Pizza):
+class turkishPizza(pizza.Pizza):
     def __init__(self):
         super().__init__('Turkish Pizza', 'Sausage, bacon, pepper, mushroom', "45 ₺")
 
 
-class cheesePizza(Pizza):
+class cheesePizza(pizza.Pizza):
     def __init__(self):
         super().__init__('Cheese Pizza', 'Parmesan, Roquefort, Cheddar, Mozzarella', "55 ₺")
 
@@ -58,11 +44,12 @@ margaritaPizzam = margaritaPizza()
 turkishPizzam = turkishPizza()
 cheesePizzam = cheesePizza()
 
+'''
 classicPizzam.get_descripton()
 margaritaPizzam.get_descripton()
 turkishPizzam.get_descripton()
 cheesePizzam.get_descripton()
-
+'''
 
 class Decorators:  # soslar üst sınıf
     def __init__(self, extra, prices):
@@ -71,11 +58,11 @@ class Decorators:  # soslar üst sınıf
 
     def get_cost(self):
         return self.component.get_cost() + \
-            Pizza.get_cost(self)
+            pizza.Pizza.get_cost(self)
 
     def get_description(self):
         return self.component.get_description() + \
-            + Pizza.get_description(self)
+            + pizza.Pizza.get_description(self)
 
 
 class Zeytin:  # soslar alt sınıfları
@@ -90,8 +77,8 @@ class Zeytin:  # soslar alt sınıfları
 
 class Mantar:
     def __init__(self):
-        self.name = "Mantar Sosu"
-        self.ingredients = ["Mantar"]
+        self.name = "Mantar Sose"
+        self.ingredients = ["Maetar"]
         self.price = 4
 
     def __str__(self):
