@@ -1,3 +1,3 @@
 # Python bootcamp project 
  Nuray Bayrakdar 
- Batuhan Çöğçü
+ Batuhan Çöpçü
