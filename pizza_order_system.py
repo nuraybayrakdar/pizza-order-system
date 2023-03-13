@@ -1,6 +1,7 @@
 import csv
 import datetime
 
+# Menu.txt adlı bir dosya oluşturun ve içine aşağıdaki metni yazıyoruz.
 with open('Menu.txt', 'w') as f:
     f.write("* Please Choose a Pizza Base:\n")
     f.write("1: Classic\n")
@@ -17,21 +18,21 @@ with open('Menu.txt', 'w') as f:
     f.write("* Thank you!\n")
 
 
+# "Pizza" üst sınıfını oluşturuyoruz. 
 class Pizza:
     def __init__(self, name, descripton, price):
         self.name = name
         self.descripton = descripton
         self.price = price
 
-    def get_descripton(self):
-        print(self.descripton)
-        # return self.description
+    def get_description(self):
+        return self.description
 
     def get_cost(self):
         print(self.price)
-        # returm self.price
+        return self.price
 
-
+#Farkli pizza türleri için Pizza snıfından miras alan  alt sınıflar oluşturuyoruz.
 class classicPizza(Pizza):
     def __init__(self):
         super().__init__("Classic Pizza",
@@ -53,18 +54,14 @@ class cheesePizza(Pizza):
         super().__init__('Cheese Pizza', 'Parmesan, Roquefort, Cheddar, Mozzarella', "55 ₺")
 
 
+
 classicPizzam = classicPizza()
 margaritaPizzam = margaritaPizza()
 turkishPizzam = turkishPizza()
 cheesePizzam = cheesePizza()
 
-classicPizzam.get_descripton()
-margaritaPizzam.get_descripton()
-turkishPizzam.get_descripton()
-cheesePizzam.get_descripton()
-
-
-class Decorators:  # soslar üst sınıf
+# Tüm alt sos sınıflarının süper sınıfı olan decorator sınıfını oluşturuyoruz
+class Decorators: 
     def __init__(self, extra, prices):
         self.extra = extra
         self.prices = prices
@@ -78,7 +75,8 @@ class Decorators:  # soslar üst sınıf
             + Pizza.get_description(self)
 
 
-class Zeytin:  # soslar alt sınıfları
+# Decorator sınıfının alt sınıfı olan sos sınıfları
+class Zeytin(Decorators):  # soslar alt sınıfları
     def __init__(self):
         self.name = "Zeytin Sosu"
         self.ingredients = ["Zeytin"]
@@ -88,7 +86,7 @@ class Zeytin:  # soslar alt sınıfları
         return self.name
 
 
-class Mantar:
+class Mantar(Decorators):
     def __init__(self):
         self.name = "Mantar Sosu"
         self.ingredients = ["Mantar"]
@@ -98,7 +96,7 @@ class Mantar:
         return self.name
 
 
-class KeciPeyniri:
+class KeciPeyniri(Decorators):
     def __init__(self):
         self.name = "Keçi Peyniri Sosu"
         self.ingredients = ["Keçi Peyniri"]
@@ -108,7 +106,7 @@ class KeciPeyniri:
         return self.name
 
 
-class Et:
+class Et(Decorators):
     def __init__(self):
         self.name = "Et Sosu"
         self.ingredients = ["Et"]
@@ -118,7 +116,7 @@ class Et:
         return self.name
 
 
-class Sogan:
+class Sogan(Decorators):
     def __init__(self):
         self.name = "Soğan Sosu"
         self.ingredients = ["Soğan"]
@@ -128,7 +126,7 @@ class Sogan:
         return self.name
 
 
-class Misir:
+class Misir(Decorators):
     def __init__(self):
         self.name = "Mısır Sosu"
         self.ingredients = ["Mısır"]
@@ -137,19 +135,24 @@ class Misir:
     def __str__(self):
         return self.name
 
+# menuyu ekrana yazdıracak method
 def show_menu():
+    # 'Menu.txt' dosyasını 'r' modunda açıyoruz
     with open('Menu.txt', 'r') as f:
         print(f.read())
-
+    
+    # kullanıcıdan pizza ve sos seçmesi için input 
     pizza_choice = input("Please choose a pizza base (1-4): ")
     sauce_choice = input("Please choose a sauce (11-16): ")
-
+    
+    #kullanıcıdan gelen inputu return ediyoruz
     return pizza_choice, sauce_choice
 
+#show_menu() methodundan dönen değerlere göre fiyat hesapalama
 def calculate_price(pizza_choice, sauce_choice):
     pizza = None
     sauce = None
-
+    
     if pizza_choice == '1':
         pizza = classicPizzam
     elif pizza_choice == '2':
@@ -171,28 +174,32 @@ def calculate_price(pizza_choice, sauce_choice):
         sauce = Sogan()
     elif sauce_choice == '16':
         sauce = Misir()
-
+   
     total_price = float(pizza.price.split()[0]) + sauce.price
 
     return total_price, pizza, sauce
 
+#müşteridem isim, tc, card no, cvc, order date değerlerini aldığımuz method
 def get_customer_info():
     name = input("Please enter your name: ")
     tc_no = input("Please enter your TC identity number: ")
-    credit_card_number = input("Please enter your credit card number: ")
-    credit_card_cvc = input("Please enter your credit card CVC number: ")
-
+   
+    
     now = datetime.datetime.now()
     order_time = now.strftime("%Y-%m-%d %H:%M:%S")
 
     total_price, pizza, sauce = calculate_price(*show_menu())
 
+    credit_card_number = input("Please enter your credit card number: ")
+    credit_card_cvc = input("Please enter your credit card CVC number: ")
+
+    #aldığımız inputu 'Orders_Database.csv' dosyasına append modunda ekliyoruz
     with open('Orders_Database.csv', 'a', newline='') as file:
         writer = csv.writer(file)
         writer.writerow([name, tc_no, credit_card_number, pizza.name + " with " + sauce.name, order_time, credit_card_cvc])
 
     print(f"Thank you for your order! Your total price is {total_price} ₺")
 
-
+#main function
 if __name__ == "__main__":
     get_customer_info()
